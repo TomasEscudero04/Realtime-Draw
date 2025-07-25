@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujo en tiempo real</title>
+    <style>
+        canvas{
+            border: 1px solid black;
+            touch-action: none;
+        }
+        .controls{
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Dibujo en tiempo real🖋️
+    </h1>
+    <div class="'controls">
+        Color: <input type="color" id="colorPicker" value="#000000">
+        Tamaño: <input type="range" id="sizePicker" min="1" max="10" value="2">
+        <button id="clearBtn">Limpiar</button>
+    </div>
+    <canvas id="canvas" width="800" height="500"></canvas>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
