@@ -1,7 +1,4 @@
-const socket = io({
-    transports: ['polling', 'websocket'], // Priorizar polling para compatibilidad con Vercel
-    upgrade: true
-});
+const socket = io();
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const colorPicker = document.getElementById("colorPicker");

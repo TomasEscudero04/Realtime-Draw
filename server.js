@@ -8,9 +8,7 @@ const io = new Server(server, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"]
-    },
-    transports: ['polling', 'websocket'], // Priorizar polling para Vercel
-    allowEIO3: true
+    }
 }); //creo la instancia de socket y le paso el server
 
 app.use(express.static('public')); //sirve los archivos estaticos desde la carpeta public
@@ -36,5 +34,5 @@ if (!process.env.VERCEL) {
     })
 }
 
-// Exportar la app para Vercel
-module.exports = app;
+// Exportar el servidor completo para Vercel (necesario para Socket.io)
+module.exports = server;
