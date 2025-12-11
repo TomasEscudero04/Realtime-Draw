@@ -4,7 +4,12 @@ const {Server} = require('socket.io')
 
 const app = express(); //crea la instancia de express
 const server = http.createServer(app); //crea un servidor http
-const io = new Server(server); //creo la instancia de socket y le paso el server
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+}); //creo la instancia de socket y le paso el server
 
 app.use(express.static('public')); //sirve los archivos estaticos desde la carpeta public
 
@@ -20,6 +25,11 @@ io.on('connection', socket => {
     })
 })
 
-server.listen(3005, () => {
-    console.log('Servidor corriendo en: http://localhost:3005');    
+const PORT = process.env.PORT || 3005;
+
+server.listen(PORT, () => {
+    console.log(`Servidor corriendo en: http://localhost:${PORT}`);    
 })
+
+// Exportar para Vercel
+module.exports = app;
