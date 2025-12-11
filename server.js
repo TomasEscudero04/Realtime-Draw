@@ -8,7 +8,9 @@ const io = new Server(server, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"]
-    }
+    },
+    transports: ['polling', 'websocket'], // Priorizar polling para Vercel
+    allowEIO3: true
 }); //creo la instancia de socket y le paso el server
 
 app.use(express.static('public')); //sirve los archivos estaticos desde la carpeta public
@@ -27,9 +29,12 @@ io.on('connection', socket => {
 
 const PORT = process.env.PORT || 3005;
 
-server.listen(PORT, () => {
-    console.log(`Servidor corriendo en: http://localhost:${PORT}`);    
-})
+// Iniciar servidor solo en desarrollo local
+if (!process.env.VERCEL) {
+    server.listen(PORT, () => {
+        console.log(`Servidor corriendo en: http://localhost:${PORT}`);    
+    })
+}
 
-// Exportar para Vercel
+// Exportar la app para Vercel
 module.exports = app;
