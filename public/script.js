@@ -1,4 +1,14 @@
-const socket = io();
+// URL del servidor Socket.io en Render
+// IMPORTANTE: Reemplaza esta URL con la URL de tu servidor en Render después del despliegue
+// Ejemplo: 'https://real-time-draw-server.onrender.com'
+// Para desarrollo local usa: 'http://localhost:3005'
+const SERVER_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3005' 
+    : 'https://TU-URL-DE-RENDER.onrender.com'; // ⚠️ CAMBIA ESTA URL
+
+const socket = io(SERVER_URL, {
+    transports: ['websocket', 'polling']
+});
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const colorPicker = document.getElementById("colorPicker");
